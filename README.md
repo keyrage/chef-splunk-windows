@@ -10,15 +10,31 @@ Windows Server 2003 and above. PowerShell is required for the domaincontroller_t
 
 ### chef-splunk-windows::default
 
-1. Upload the Windows Technology Add-on installer to your local webserver and update your node's attributes (noted below) to reflect your URL & SHA-256 checksum.
-2. Indicate your acceptence of the Splunk license by adding `['splunk']['accept_license'] = 'true'` to your node's attributes
-3. Include `chef-splunk-windows` in your node's `run_list` along with any other relevant attributes:
+1. Indicate your acceptence of the Splunk license by adding `['splunk']['accept_license'] = 'true'` to your node's attributes
+2. Include `chef-splunk-windows` in your node's `run_list` along with any other relevant attributes:
 
 ```json
 {
   "default_attributes": {
     "splunk": {
-      "accept_license": true,
+      "accept_license": true
+    }
+  },
+  "run_list": [
+    "recipe[chef-splunk-windows::default]"
+  ]
+}
+```
+
+### chef-splunk-windows::default
+
+1. Upload the Windows Technology Add-on installer to your local webserver and update your node's attributes (noted below) to reflect your URL & SHA-256 checksum.
+3. Include `chef-splunk-windows::windows_ta` in your node's `run_list` along with any other relevant attributes:
+
+```json
+{
+  "default_attributes": {
+    "splunk": {
       "windows_ta": {
         "checksum": "SHA256CHECKSUMHERE",
         "url": "http://example.server.internal/splunkwindowstainstaller.zip"
@@ -26,7 +42,8 @@ Windows Server 2003 and above. PowerShell is required for the domaincontroller_t
     }
   },
   "run_list": [
-    "recipe[chef-splunk-windows::default]"
+    "recipe[chef-splunk-windows::default]",
+    "recipe[chef-splunk-windows::windows_ta]"
   ]
 }
 ```
