@@ -4,19 +4,25 @@ This cookbook installs and configures a Splunk universal forwarder on a Windows 
 
 ## Supported Platforms
 
-Windows Server 2003 and above. PowerShell is required for the windows_ta and domaincontroller_ta recipes.
+Windows Server 2003 and above. PowerShell is required for the domaincontroller_ta recipe.
 
 ## Usage
 
 ### chef-splunk-windows::default
 
-Include `chef-splunk-windows` in your node's `run_list` along with any relevant attributes:
+1. Upload the Windows Technology Add-on installer to your local webserver and update your node's attributes (noted below) to reflect your URL & SHA-256 checksum.
+2. Indicate your acceptence of the Splunk license by adding `['splunk']['accept_license'] = 'true'` to your node's attributes
+3. Include `chef-splunk-windows` in your node's `run_list` along with any other relevant attributes:
 
 ```json
 {
   "default_attributes": {
     "splunk": {
-      "accept_license": true
+      "accept_license": true,
+      "windows_ta": {
+        "checksum": "SHA256CHECKSUMHERE",
+        "url": "http://example.server.internal/splunkwindowstainstaller.zip"
+      }
     }
   },
   "run_list": [

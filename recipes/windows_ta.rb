@@ -17,41 +17,37 @@
 # limitations under the License.
 #
 
+# Needed for zip actions below
+include_recipe 'windows::default'
+
 service "SplunkForwarder" do
   action :nothing
   supports :restart => true
 end
 
-if File.directory?("#{node['splunk']['forwarder']['home']}/etc/apps")
-  # Download the TA from the URL specified
-  ta_file = node['splunk']['windows_ta']['url'].split('/').last
-  remote_file "#{Chef::Config[:file_cache_path]}/#{ta_file}" do 
+# If the universal forwarder has been installed and the local TA URL specified, proceed
+if File.directory?("#{node['splunk']['forwarder']['home']}/etc/apps") and (not node['splunk']['windows_ta']['url'].include?('download.contoso.com'))
+  # Deploy the TA file
+  windows_zipfile "#{node['splunk']['forwarder']['home']}/etc/apps" do
     source node['splunk']['windows_ta']['url']
-    notifies :run, 'powershell_script[Extract Windows TA]'
+    checksum node['splunk']['windows_ta']['checksum']
+    action :unzip
+    not_if {::File.directory?("#{node['splunk']['forwarder']['home']}/etc/apps/Splunk_TA_windows")}
   end
-
-  # Extract the TA file
-  powershell_script "Extract Windows TA" do
-    code <<-EOH
-    $shell = New-Object -com shell.application
-    $zip_file = $shell.NameSpace("#{Chef::Config[:file_cache_path]}\\#{ta_file}")
-    $destination = $shell.NameSpace("#{node['splunk']['forwarder']['home']}\\etc\\apps")
-    $destination.CopyHere($zip_file.items(), 0x14)
-    EOH
-    action :nothing
-  end
-
+  
   if File.directory?("#{node['splunk']['forwarder']['home']}/etc/apps/Splunk_TA_windows")
     # Create a local directory
     directory "#{node['splunk']['forwarder']['home']}/etc/apps/Splunk_TA_windows/local" do
       inherits true
       action :create
     end
-
+    
     # Configure the inputs file
     template "#{node['splunk']['forwarder']['home']}/etc/apps/Splunk_TA_windows/local/inputs.conf" do
       source 'windows_ta_inputs.conf.erb'
       notifies :restart, 'service[SplunkForwarder]'
     end
   end
+else
+  log "Splunk not installed or local TA URL not defined"
 end

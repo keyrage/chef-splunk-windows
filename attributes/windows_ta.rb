@@ -19,6 +19,7 @@
 
 # A path to the Windows TA file must be provided; the file must be in zip format
 default['splunk']['windows_ta']['url'] = 'http://download.contoso.com/splunk/splunk-add-on-for-microsoft-windows_470.zip'
+default['splunk']['windows_ta']['checksum'] = '62c3082362fce4468848c087481efb51f3a49000fdc2e1b2e763fc850e049c12'
 
 # OS Logs
 default['splunk']['windows_ta']['application_log'] = {
