@@ -25,6 +25,7 @@ user, pw = splunk_auth_info.split(':')
 execute 'change-admin-user-password-from-default' do
   command "\"#{node['splunk']['forwarder']['home']}/bin/splunk.exe\" edit user #{user} -password '#{pw}' -role admin -auth admin:changeme"
   not_if { ::File.exist?("#{node['splunk']['forwarder']['home']}/etc/.setup_#{user}_password") }
+  sensitive true
 end
 
 file "#{node['splunk']['forwarder']['home']}/etc/.setup_#{user}_password" do
