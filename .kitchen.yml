@@ -3,13 +3,17 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: windows-2012r2
+  - name: windows-2008r2
 
 suites:
   - name: default
     run_list:
+      - recipe[chef-splunk-windows::default]
     attributes:
+      dev_mode: true
+      splunk:
+        accept_license: true
