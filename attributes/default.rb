@@ -20,13 +20,21 @@
 default['splunk']['accept_license'] = false
 default['splunk']['receiver_port'] = '9997'
 
-if node['kernel']['machine'] == 'x86_64'
-  default['splunk']['forwarder']['url'] = 'http://download.splunk.com/releases/6.1.3/universalforwarder/windows/splunkforwarder-6.1.3-220630-x64-release.msi'
-else
-  default['splunk']['forwarder']['url'] = 'http://download.splunk.com/releases/6.1.3/universalforwarder/windows/splunkforwarder-6.1.3-220630-x86-release.msi'
-end
+ver = '6.3.0'
+build = 'aa7d4b1ccb80'
+arch = case node['kernel']['machine']
+       when 'x86_64'
+         'x64'
+       else
+         'x86'
+       end
+default['splunk']['forwarder']['url'] = 'http://download.splunk.com/releases/'\
+                                        "#{ver}/universalforwarder/windows/"\
+                                        "splunkforwarder-#{ver}-#{build}-"\
+                                        "#{arch}-release.msi"
 
-default['splunk']['forwarder']['home'] = 'C:\Program Files\SplunkUniversalForwarder'
+default['splunk']['forwarder']['home'] =
+  'C:\Program Files\SplunkUniversalForwarder'
 default['splunk']['forwarder']['installer_flags'] = [
   "INSTALLDIR=\"#{node['splunk']['forwarder']['home']}\""
 ]
