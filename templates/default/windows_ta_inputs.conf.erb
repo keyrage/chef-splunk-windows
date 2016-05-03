@@ -16,6 +16,7 @@ evt_resolve_ad_obj = 1
 checkpointInterval = <%= node['splunk']['windows_ta']['security_log']['checkpointInterval'] %>
 blacklist1 = EventCode=4662 Message="Object Type:\s+(?!groupPolicyContainer)"
 blacklist2 = EventCode=566 Message="Object Type:\s+(?!groupPolicyContainer)"
+suppress_text = <%= node['splunk']['windows_ta']['security_log']['suppress'] %>
 index = <%= node['splunk']['windows_ta']['security_log']['index'] %>
 
 [WinEventLog://System]

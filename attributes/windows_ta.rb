@@ -23,45 +23,46 @@ default['splunk']['windows_ta']['checksum'] = '62c3082362fce4468848c087481efb51f
 
 # OS Logs
 default['splunk']['windows_ta']['application_log'] = {
-  "disabled" => "1",
-  "checkpointInterval" => "5",
-  "index" => "winevents"
+  'disabled' => '1',
+  'checkpointInterval' => '5',
+  'index' => 'winevents'
 }
 default['splunk']['windows_ta']['security_log'] = {
-  "disabled" => "1",
-  "checkpointInterval" => "5",
-  "index" => "winevents"
+  'disabled' => '1',
+  'checkpointInterval' => '5',
+  'index' => 'winevents',
+  'suppress' => '0'
 }
 default['splunk']['windows_ta']['system_log'] = {
-  "disabled" => "1",
-  "checkpointInterval" => "5",
-  "index" => "winevents"
+  'disabled' => '1',
+  'checkpointInterval' => '5',
+  'index' => 'winevents'
 }
 
 # Windows Update Log
 default['splunk']['windows_ta']['windowsupdate_log'] = {
-  "disabled" => "1",
-  "index" => "windows"
+  'disabled' => '1',
+  'index' => 'windows'
 }
 
 # Performance Counters
 default['splunk']['windows_ta']['perfmon_cpu'] = {
-  "disabled" => "1",
-  "interval" => "10",
-  "index" => "perfmon"
+  'disabled' => '1',
+  'interval' => '10',
+  'index' => 'perfmon'
 }
 default['splunk']['windows_ta']['perfmon_memory'] = {
-  "disabled" => "1",
-  "interval" => "10",
-  "index" => "perfmon"
+  'disabled' => '1',
+  'interval' => '10',
+  'index' => 'perfmon'
 }
 default['splunk']['windows_ta']['perfmon_disk'] = {
-  "disabled" => "1",
-  "interval" => "3600",
-  "index" => "perfmon"
+  'disabled' => '1',
+  'interval' => '3600',
+  'index' => 'perfmon'
 }
 default['splunk']['windows_ta']['perfmon_network'] = {
-  "disabled" => "1",
-  "interval" => "10",
-  "index" => "perfmon"
+  'disabled' => '1',
+  'interval' => '10',
+  'index' => 'perfmon'
 }

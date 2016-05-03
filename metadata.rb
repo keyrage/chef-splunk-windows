@@ -6,7 +6,7 @@ description      'Installs and configures the Splunk Universal Forwarder on Wind
 long_description 'Installs and configures the Splunk Universal Forwarder on Windows servers'
 source_url       'https://github.com/biola/chef-splunk-windows'
 issues_url       'https://github.com/biola/chef-splunk-windows/issues'
-version          '0.5.0'
+version          '0.5.1'
 
 depends          'chef-vault', '>= 1.0'
 depends          'windows', '~> 1.34'
