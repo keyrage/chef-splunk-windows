@@ -20,8 +20,8 @@
 default['splunk']['accept_license'] = false
 default['splunk']['receiver_port'] = '9997'
 
-ver = '6.3.0'
-build = 'aa7d4b1ccb80'
+ver = '6.5.3'
+build = '36937ad027d4'
 arch = case node['kernel']['machine']
        when 'x86_64'
          'x64'
