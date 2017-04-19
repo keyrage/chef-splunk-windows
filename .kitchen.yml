@@ -1,13 +1,37 @@
----
 driver:
-  name: vagrant
+  name: azurerm
+
+driver_config:
+  subscription_id: <%= ENV['AZURE_SUBSCRIPTIONID'] %>
+  location: Australia Southeast
+  machine_size: Standard_A2
 
 provisioner:
   name: chef_zero
+  require_chef_omnibus: 12.19.36
 
 platforms:
-  - name: windows-2012r2
-  - name: windows-2008r2
+  - name: windows2008-r2
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2008-R2-SP1:latest
+      winrm_powershell_script: |-
+        winrm quickconfig -q
+        winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="512"}'
+        winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+        winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+        winrm set winrm/config/service/auth '@{Basic="true"}'
+    transport:
+      name: winrm
+  - name: windows2012-r2
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:latest
+    transport:
+      name: winrm
+  - name: windows2016
+    driver_config:
+      image_urn: MicrosoftWindowsServer:WindowsServer:2016-Datacenter:latest
+    transport:
+      name: winrm
 
 suites:
   - name: default
