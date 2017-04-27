@@ -4,7 +4,7 @@ This cookbook installs and configures a Splunk universal forwarder on a Windows 
 
 ## Supported Platforms
 
-Windows Server 2003 and above. PowerShell is required for the domaincontroller_ta recipe.
+Windows Server 2008 R2 and above. PowerShell is required for the domaincontroller_ta recipe.
 
 ## Usage
 
