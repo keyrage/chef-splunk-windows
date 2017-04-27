@@ -19,7 +19,6 @@
 
 default['splunk']['accept_license'] = false
 default['splunk']['receiver_port'] = '9997'
-
 ver = '6.5.3'
 build = '36937ad027d4'
 arch = case node['kernel']['machine']
