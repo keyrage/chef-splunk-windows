@@ -8,8 +8,7 @@ driver_config:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: 14.3.37
-
+  
 platforms:
   - name: windows2012-r2
     driver_config:
@@ -24,12 +23,40 @@ platforms:
 
 verifier:
   name: inspec
+  inspec_tests:
+    - path: test/integration/default/default.rb
 
 suites:
-  - name: default
+  - name: default-chef-14-3-37
+    require_chef_omnibus: 14.3.37
     run_list:
       - recipe[chef-splunk-windows::default]
     attributes:
       dev_mode: true
       splunk:
         accept_license: true
+  - name: default-chef-14-2.0
+    require_chef_omnibus: 14.2.0
+    run_list:
+      - recipe[chef-splunk-windows::default]
+    attributes:
+      dev_mode: true
+      splunk:
+        accept_license: true
+  - name: default-chef-14-1-12
+    require_chef_omnibus: 14.1.12
+    run_list:
+      - recipe[chef-splunk-windows::default]
+    attributes:
+      dev_mode: true
+      splunk:
+        accept_license: true
+  - name: default-chef-14-2-202
+    require_chef_omnibus: 14.0.202
+    run_list:
+      - recipe[chef-splunk-windows::default]
+    attributes:
+      dev_mode: true
+      splunk:
+        accept_license: true
+  
