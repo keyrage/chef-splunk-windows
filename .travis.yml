@@ -1,7 +1,5 @@
 rvm
-- 2.5.0
-
-env:
+  - 2.5.0
 
 script:
-- KITCHEN_LOCAL_YAML=.kitchen.yml bundle exec rake
+  - KITCHEN_LOCAL_YAML=.kitchen.yml bundle exec rake
