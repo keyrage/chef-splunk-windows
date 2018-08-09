@@ -30,6 +30,6 @@ task :integration do
 end
 
 # Default
-task default: %w(style unit)
+task default: %w(style unit integration)
 
-task full: %w(style unit integration)
+task lint: %w(style unit integration)

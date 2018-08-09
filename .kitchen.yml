@@ -35,28 +35,4 @@ suites:
       dev_mode: true
       splunk:
         accept_license: true
-  - name: default-chef-14-2.0
-    require_chef_omnibus: 14.2.0
-    run_list:
-      - recipe[chef-splunk-windows::default]
-    attributes:
-      dev_mode: true
-      splunk:
-        accept_license: true
-  - name: default-chef-14-1-12
-    require_chef_omnibus: 14.1.12
-    run_list:
-      - recipe[chef-splunk-windows::default]
-    attributes:
-      dev_mode: true
-      splunk:
-        accept_license: true
-  - name: default-chef-14-2-202
-    require_chef_omnibus: 14.0.202
-    run_list:
-      - recipe[chef-splunk-windows::default]
-    attributes:
-      dev_mode: true
-      splunk:
-        accept_license: true
-  
+ 
