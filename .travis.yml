@@ -1,0 +1,7 @@
+rvm
+- 2.5.0
+
+env:
+
+script:
+- KITCHEN_LOCAL_YAML=.kitchen.yml bundle exec rake
