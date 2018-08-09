@@ -12,4 +12,4 @@ supports windows
 chef_version '~> 14'
 
 depends          'chef-vault', '>= 3.1.0'
-#depends          'windows', '~> 5.0'
+depends          'windows', '~> 5.0'
