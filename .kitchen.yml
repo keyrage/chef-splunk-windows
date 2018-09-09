@@ -35,4 +35,21 @@ suites:
       dev_mode: true
       splunk:
         accept_license: true
- 
+  - name: setup-auth-chef-14-3-37
+    require_chef_omnibus: 14.3.37
+    run_list:
+      - recipe[chef-splunk-windows::default]
+      - recipe[chef-splunk-windows::setup_auth]
+    attributes:
+      dev_mode: true
+      splunk:
+        accept_license: true
+  - name: windowsta-chef-14-3-37
+    require_chef_omnibus: 14.3.37
+    run_list:
+      - recipe[chef-splunk-windows::default]
+      - recipe[chef-splunk-windows::windows_ta]
+    attributes:
+      dev_mode: true
+      splunk:
+        accept_license: true
